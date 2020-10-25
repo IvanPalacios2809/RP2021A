@@ -1,11 +1,12 @@
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package clasificadores;
 
 import data.Patron;
+import data.PatronRepresentativo;
 import interfaces.ClasificadorSupervisado;
 import java.util.ArrayList;
 
@@ -16,35 +17,36 @@ import java.util.ArrayList;
 public class MinimaDistancia implements ClasificadorSupervisado{
 
     ArrayList<Patron> representativos;
-    
+
     public MinimaDistancia() {
-        this.representativos = new ArrayList<>();
+        
     }
            
     @Override
     public void entrenar(ArrayList<Patron> instancias) {
-     int numeroclases=0;
-      double promedio;
-      ArrayList<Integer> numeroinstancias=new ArrayList<>();
-     int numero=0;
-      // calcular los representativos
-     for(int i=0;i<instancias.size();i++){
-        
-      if(instancias.get(i).getClase()!=instancias.get(i-1).getClase()){
-        numeroclases++;
-        numero=0;
+      //Saca los patrones representativos.
+      int i=0;
+      ArrayList<PatronRepresentativo> PatronesRepresentativos=new ArrayList<>();
+      for(i=0;i<instancias.size();i++){//Recorre el arraylist de Patrones
+         
+        if(PatronRepresentativo.comparar(instancias.get(i-1), instancias.get(i))){//Se compara la clase de las instancias para ver si son iguales
+            PatronesRepresentativos.add(new PatronRepresentativo(instancias.get(i).getVectorC(), instancias.get(i).getClase()));
+         }
+
+         else{
+          PatronesRepresentativos.get(PatronesRepresentativos.size()-1).AgregarUnoAlContador();//Se le agrega al  contador del ultimo
+                                                                                                //Patron Representativo una unidad ya que hay una clase repetida
+          PatronesRepresentativos.get(PatronesRepresentativos.size()-1).AcumularValores(instancias.get(i));//Se agrega el valor de cada uno de las cantidades del vector
+                                                                                                            //al ultimo patron representativo
+         }
       }
-      else{
-        numero++;
-        numeroinstancias.set(numeroclases,numero);
-      }
+
+      PatronRepresentativo.promediar(PatronesRepresentativos);
     }
-     for(int x=0;x<numeroinstancias.size();x++){
-       for(int y=0;y<numeroinstancias.get(x);y++){
-      promedio=promedio+             
-       }
-     } 
-    }
+
+
+
+
 
     @Override
     public void clasificar(ArrayList<Patron> instancias) {

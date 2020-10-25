@@ -13,7 +13,7 @@ public class Patron {
     
     private String clase;
     private String claseResultante;
-    private double[] vectorC;
+    public double[] vectorC;
 
     public Patron(int n) {
         this.clase = "";
