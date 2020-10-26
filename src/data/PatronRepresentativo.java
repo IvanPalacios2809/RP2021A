@@ -41,6 +41,7 @@ public class PatronRepresentativo extends Patron {
             for(int i=0;i<PatronesRepresentativos.get(i).getVectorC().length;i++){
                 double CantidadPromediada=PatronesRepresentativos.get(j).vectorC[i]/PatronesRepresentativos.get(j).contador;
                 PatronesRepresentativos.get(j).vectorC[i]=CantidadPromediada;
+                System.out.println(""+PatronesRepresentativos.get(j).vectorC[i]);
             }
         }
     }

@@ -14,12 +14,13 @@ import java.util.ArrayList;
  *
  * @author working
  */
+
 public class MinimaDistancia implements ClasificadorSupervisado{
 
     ArrayList<Patron> representativos;
 
-    public MinimaDistancia() {
-        
+    public MinimaDistancia(ArrayList<Patron> representativos) {
+        this.representativos=representativos;
     }
            
     @Override
@@ -51,6 +52,21 @@ public class MinimaDistancia implements ClasificadorSupervisado{
     @Override
     public void clasificar(ArrayList<Patron> instancias) {
        // clasificar las instancias
+      Patron[][] distancias=new double[instancias.size()][representativos.size()];
+       for(int j=0;j<representativos.size()-1;j++){
+         for(int i=0;i<instancias.size()-1;i++){
+            distancias.[i][j] 
+            distancias[i][j]=instancias.get(j).calcularDistancia(this.representativos.get(i));
+       }
+      }
+      for(int j=0;j<instancias.size()-1;j++){
+         for(int i=0;i<representativos.size()-1;i++){
+             if(distancias[i][j]<distancias[i-1][j]){
+
+             }
+       }
+      }
+      
     }
     
 }
