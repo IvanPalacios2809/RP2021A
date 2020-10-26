@@ -64,17 +64,17 @@ public class MinimaDistancia implements ClasificadorSupervisado{
             
        }
       }
-       System.out.println(distancias[0][1]);
-       System.out.println(distancias[1][1]);
-       System.out.println(distancias[2][1]);
+       System.out.println(distancias[149][0]);
+       System.out.println(distancias[149][1]);
+       System.out.println(distancias[149][2]);
        
       
        
-       for(int j=1;j<instancias.size();j++){
-          instancias.get(0).setClaseResultante(representativos.get(0).getClase());
-         for(int i=0;i<representativos.size();i++){
+       for(int j=0;j<instancias.size();j++){
+          instancias.get(j).setClaseResultante(representativos.get(0).getClase());
+         for(int i=1;i<representativos.size();i++){
              
-             if(distancias[j][i]<distancias[j-1][i]){
+             if(distancias[j][i]<distancias[j][i-1]){
                  instancias.get(j).setClaseResultante(representativos.get(i).getClase());
              }
        }
