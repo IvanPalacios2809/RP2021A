@@ -10,9 +10,9 @@ import data.Patron;
 import data.PatronRepresentativo;
 
 import java.util.ArrayList;
-
+/*
 import clasificadores.MinimaDistancia;
-
+*/
 /**
  *
  * @author working
@@ -23,9 +23,9 @@ public class RP2021A {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        /*
         ArrayList<Patron> instancias = LeerDatos.tokenizarDataSet();
-        double[] arreglo={2.4,3.3,5.6,7.8};
+        
         
         double[] distancias = new double[instancias.size()];
         
@@ -34,6 +34,9 @@ public class RP2021A {
            distancias[x] =    instancias.get(x).calcularDistancia(j);
         }
         PatronRepresentativo p1= new PatronRepresentativo(arreglo, "hola");
+        
+        */
+        double[] arreglo={2.4,3.3,5.6,7.8};
         ArrayList<PatronRepresentativo> pr= new ArrayList<>();
         pr.add(new PatronRepresentativo(arreglo,"hola"));
                PatronRepresentativo.promediar(pr);

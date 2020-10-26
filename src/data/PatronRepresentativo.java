@@ -37,11 +37,15 @@ public class PatronRepresentativo extends Patron {
     }
 
     public static void promediar(ArrayList<PatronRepresentativo> PatronesRepresentativos){
+        //System.out.println(""+(PatronesRepresentativos.size()));
+        System.out.println(""+(PatronesRepresentativos.get(0).getVectorC().length));
         for(int j=0;j<PatronesRepresentativos.size();j++){
-            for(int i=0;i<PatronesRepresentativos.get(i).getVectorC().length;i++){
+            for(int i=0;i<PatronesRepresentativos.get(j).getVectorC().length-1;i++){
                 double CantidadPromediada=PatronesRepresentativos.get(j).vectorC[i]/PatronesRepresentativos.get(j).contador;
                 PatronesRepresentativos.get(j).vectorC[i]=CantidadPromediada;
+                System.out.println("entre");
                 System.out.println(""+PatronesRepresentativos.get(j).vectorC[i]);
+                System.out.println("Y sali");
             }
         }
     }
