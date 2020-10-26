@@ -57,14 +57,23 @@ public class MinimaDistancia implements ClasificadorSupervisado{
        // clasificar las instancias
       double[][] distancias=new double[instancias.size()][representativos.size()];
       
-       for(int j=0;j<representativos.size()-1;j++){
-         for(int i=0;i<instancias.size()-1;i++){
+       for(int j=0;j<instancias.size();j++){
+         for(int i=0;i<representativos.size();i++){
             
-            distancias[i][j]=instancias.get(i).calcularDistancia(this.representativos.get(j));
+            distancias[j][i]=instancias.get(j).calcularDistancia(this.representativos.get(i));
+            
        }
       }
-      for(int j=1;j<instancias.size();j++){
-         for(int i=1;i<representativos.size();i++){
+       System.out.println(distancias[0][1]);
+       System.out.println(distancias[1][1]);
+       System.out.println(distancias[2][1]);
+       
+      
+       
+       for(int j=1;j<instancias.size();j++){
+          instancias.get(0).setClaseResultante(representativos.get(0).getClase());
+         for(int i=0;i<representativos.size();i++){
+             
              if(distancias[j][i]<distancias[j-1][i]){
                  instancias.get(j).setClaseResultante(representativos.get(i).getClase());
              }
@@ -79,8 +88,11 @@ public class MinimaDistancia implements ClasificadorSupervisado{
         for(int i=0;i<instancias.size();i++){
             if(instancias.get(i).getClaseResultante().equals(instancias.get(i).getClase())){
                 cantidad++;
-                
+
             }
+            System.out.println(""+i+"Clase original:"+instancias.get(i).getClase());
+            System.out.println("Clase resultante:"+instancias.get(i).getClaseResultante());
+                
         }
         efectividad=(cantidad*100)/instancias.size();
         return "La efectividad es de"+efectividad+"%";

@@ -38,6 +38,7 @@ public class Patron {
          sumatoria+= Math.pow(this.vectorC[x]-aux.getVectorC()[x], 2);
         }
         sumatoria = Math.sqrt(sumatoria);
+        
         return sumatoria;
     }
 
