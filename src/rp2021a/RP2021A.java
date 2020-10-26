@@ -5,6 +5,7 @@
  */
 package rp2021a;
 
+import clasificadores.MinimaDistancia;
 import data.LeerDatos;
 import data.Patron;
 import data.PatronRepresentativo;
@@ -36,11 +37,14 @@ public class RP2021A {
         PatronRepresentativo p1= new PatronRepresentativo(arreglo, "hola");
         
         */
-        double[] arreglo={2.4,3.3,5.6,7.8};
-        ArrayList<PatronRepresentativo> pr= new ArrayList<>();
-        pr.add(new PatronRepresentativo(arreglo,"hola"));
-               PatronRepresentativo.promediar(pr);
-        System.out.println();
+        ArrayList<Patron> instancias=LeerDatos.tokenizarDataSet();
+        
+        MinimaDistancia md=new MinimaDistancia();
+        md.entrenar(instancias);
+        md.clasificar(instancias);
+        System.out.println(md.efectividad(instancias));
+        System.out.println(instancias.get(0).getClaseResultante());
+
         // TODO: TOKENIZADOR PARA PODER SEPARAR POR COMAS Y GENERAR UN COLECCION DE PATRONES
         
     }
