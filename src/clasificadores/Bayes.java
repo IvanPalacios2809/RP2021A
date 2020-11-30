@@ -40,10 +40,9 @@ public class Bayes implements ClasificadorSupervisado {
             Clases.get(Clases.size()-1).Patrones.add(instancias.get(i));
         }
      }
-      System.out.println(Clases.get(0).vectorC.length);
       PatronBayes.promediar(Clases);
       PatronBayes.sacarvarianza(Clases);
-      System.out.println(Clases.get(0).varianza[0]);
+      
     }
     public void clasificar(ArrayList<Patron> instancias){
         

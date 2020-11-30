@@ -59,10 +59,6 @@ public class PatronBayes extends Patron{
         }
     }
         public static void sacarvarianza(ArrayList<PatronBayes> PatronesBayes){
-            
-            System.out.println("Patrones Bayes"+PatronesBayes.size());
-            System.out.println("Patrones en Bayes 1"+PatronesBayes.get(0).Patrones.size());
-            System.out.println("Vector del patron en bayes 1"+PatronesBayes.get(0).varianza.length);
             for(int k=0;k<PatronesBayes.size();k++){
                 for(int j=0;j<PatronesBayes.get(k).Patrones.size();j++){
                     for(int i=0;i<PatronesBayes.get(k).Patrones.get(j).vectorC.length;i++){
@@ -71,7 +67,7 @@ public class PatronBayes extends Patron{
                 
                 }
             }
-            System.out.println(PatronesBayes.get(2).varianza[0]);
+            
             }
             
         
