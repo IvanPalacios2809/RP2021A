@@ -46,7 +46,7 @@ public class PatronRepresentativo extends Patron {
         for(int j=0;j<PatronesRepresentativos.size();j++){
             System.out.println("Patron representativo:"+PatronesRepresentativos.get(j).getClase());
             for(int i=0;i<PatronesRepresentativos.get(j).getVectorC().length;i++){
-                double CantidadPromediada=PatronesRepresentativos.get(j).vectorC[i]/PatronesRepresentativos.get(j).contador;
+                double CantidadPromediada=PatronesRepresentativos.get(j).vectorC[i]/(PatronesRepresentativos.get(j).contador+1);
                 PatronesRepresentativos.get(j).vectorC[i]=CantidadPromediada;
                 
                 System.out.println(PatronesRepresentativos.get(j).vectorC[i]);
@@ -54,6 +54,7 @@ public class PatronRepresentativo extends Patron {
             
             
         }
+        System.out.println("Tamano:"+PatronesRepresentativos.size());
     }
 
 }

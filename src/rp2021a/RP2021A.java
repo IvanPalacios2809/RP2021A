@@ -5,6 +5,7 @@
  */
 package rp2021a;
 
+import clasificadores.Bayes;
 import clasificadores.MinimaDistancia;
 import data.LeerDatos;
 import data.Patron;
@@ -38,13 +39,14 @@ public class RP2021A {
         
         */
         ArrayList<Patron> instancias=LeerDatos.tokenizarDataSet();
+        Bayes b=new Bayes();
+        b.entrenar(instancias);
+//        MinimaDistancia md=new MinimaDistancia();
+//        md.entrenar(instancias);
+//        md.clasificar(identificadas);
+//        System.out.println(md.efectividad(identificadas));
         
-        MinimaDistancia md=new MinimaDistancia();
-        md.entrenar(instancias);
-        md.clasificar(instancias);
-        System.out.println(md.efectividad(instancias));
-        System.out.println(instancias.get(0).getClaseResultante());
-
+        
         // TODO: TOKENIZADOR PARA PODER SEPARAR POR COMAS Y GENERAR UN COLECCION DE PATRONES
         
     }
