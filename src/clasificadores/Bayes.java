@@ -22,27 +22,25 @@ public class Bayes implements ClasificadorSupervisado {
       int i=0;
       
       for(i=1;i<instancias.size();i++){//Recorre el arraylist de Patrones
-        if(Clases.isEmpty()){
+        if(Clases.isEmpty()){//Si es el primer elemento de la lista 
             Clases.add(new PatronBayes(instancias.get(i-1).vectorC,instancias.get(i-1).getClase()));
-             Clases.get(Clases.size()-1).AgregarUnoAlContador();
-             Clases.get(Clases.size()-1).Patrones.add(instancias.get(i-1));
+            Clases.get(Clases.size()-1).AgregarUnoAlContador();
+            
         } 
         if(PatronBayes.comparar(instancias.get(i-1), instancias.get(i))){//Se compara la clase de las instancias para ver si son iguales
             Clases.add(new PatronBayes(instancias.get(i).getVectorC(), instancias.get(i).getClase()));
             Clases.get(Clases.size()-1).AgregarUnoAlContador();
-             Clases.get(Clases.size()-1).Patrones.add(instancias.get(i));
+        
          }
-        else{
-            Clases.get(Clases.size()-1).AgregarUnoAlContador();//Se le agrega al  contador del ultimo
-                                                                                                //Patron Representativo una unidad ya que hay una clase repetida
-          Clases.get(Clases.size()-1).AcumularValores(instancias.get(i));//Se agrega el valor de cada uno de las cantidades del vector
-                                                                                                            //al ultimo patron representativo
-            Clases.get(Clases.size()-1).Patrones.add(instancias.get(i));
+        else{//Si no hay una clase nueva.
+            Clases.get(Clases.size()-1).AgregarUnoAlContador();
+            Clases.get(Clases.size()-1).AcumularValores(instancias.get(i));
+          
         }
      }
       PatronBayes.promediar(Clases);
-      PatronBayes.sacarvarianza(Clases);
-      
+      PatronBayes.sacarvarianza(Clases.get(0),instancias);
+      System.out.println(Clases.get(0).varianza[0]);
     }
     public void clasificar(ArrayList<Patron> instancias){
         

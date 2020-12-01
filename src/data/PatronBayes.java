@@ -48,28 +48,45 @@ public class PatronBayes extends Patron{
         //System.out.println(""+(PatronesRepresentativos.size()));
         
         for(int j=0;j<PatronesBayes.size();j++){
-            System.out.println("Patron Bayes:"+PatronesBayes.get(j).getClase());
+            
             for(int i=0;i<PatronesBayes.get(j).getVectorC().length;i++){
                 PatronesBayes.get(j).promedio[i]=PatronesBayes.get(j).vectorC[i]/(PatronesBayes.get(j).contador);
-                System.out.println(PatronesBayes.get(j).promedio[i]);
+                
                 
             }
             
             
         }
     }
-        public static void sacarvarianza(ArrayList<PatronBayes> PatronesBayes){
-            for(int k=0;k<PatronesBayes.size();k++){
-                for(int j=0;j<PatronesBayes.get(k).Patrones.size();j++){
-                    for(int i=0;i<PatronesBayes.get(k).Patrones.get(j).vectorC.length;i++){
-                    PatronesBayes.get(k).varianza[i]=PatronesBayes.get(k).varianza[i]+(Math.pow(PatronesBayes.get(k).Patrones.get(j).vectorC[i]-PatronesBayes.get(k).promedio[i],2))/PatronesBayes.get(k).contador;
+        public static void sacarvarianza(PatronBayes PB, ArrayList<Patron> instancias){
+            int punto_partida=0;    
+            while(PB.getClase()!=instancias.get(punto_partida).getClase()){
+                punto_partida++;
+                System.out.println("entre");
                 }
-                
+            int punto_final=PB.contador+punto_partida;
+                while(punto_partida<punto_final){
+                    for(int i=0;i<PB.varianza.length;i++){
+                    PB.varianza[i]+=instancias.get(punto_partida).vectorC[i];
+                }
+            punto_partida++;
+            }
                 }
             }
             
-            }
+
+        
+                
+        
+        
+        
+        
+                
+                
+            
+            
+            
             
         
-}
+
 

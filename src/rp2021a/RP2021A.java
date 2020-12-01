@@ -41,6 +41,7 @@ public class RP2021A {
         ArrayList<Patron> instancias=LeerDatos.tokenizarDataSet();
         Bayes b=new Bayes();
         b.entrenar(instancias);
+        
 //        MinimaDistancia md=new MinimaDistancia();
 //        md.entrenar(instancias);
 //        md.clasificar(identificadas);
