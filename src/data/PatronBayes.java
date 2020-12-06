@@ -60,16 +60,19 @@ public class PatronBayes extends Patron{
     }
         public static void sacarvarianza(PatronBayes PB, ArrayList<Patron> instancias){
             int punto_partida=0;    
+            System.out.println(PB.contador);
             while(PB.getClase()!=instancias.get(punto_partida).getClase()){
                 punto_partida++;
                 System.out.println("entre");
                 }
+               
             int punto_final=PB.contador+punto_partida;
                 while(punto_partida<punto_final){
                     for(int i=0;i<PB.varianza.length;i++){
-                    PB.varianza[i]+=instancias.get(punto_partida).vectorC[i];
+                        System.out.println(punto_partida);
+                    PB.varianza[i]=PB.varianza[i]+instancias.get(punto_partida).vectorC[i];
                 }
-            punto_partida++;
+            punto_partida++;     
             }
                 }
             }

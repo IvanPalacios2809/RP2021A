@@ -20,7 +20,12 @@ public class Bayes implements ClasificadorSupervisado {
      ArrayList<PatronBayes> Clases=new ArrayList<>();   
       //Saca los patrones representativos.
       int i=0;
+     
+      ArrayList<Patron> aberraciones=new ArrayList<>();
+      for(int w=0;w<aberraciones.size();w++){
       
+      aberraciones.add(new Patron(instancias.get(w).vectorC, instancias.get(w).getClase()));
+      }
       for(i=1;i<instancias.size();i++){//Recorre el arraylist de Patrones
         if(Clases.isEmpty()){//Si es el primer elemento de la lista 
             Clases.add(new PatronBayes(instancias.get(i-1).vectorC,instancias.get(i-1).getClase()));
@@ -39,8 +44,8 @@ public class Bayes implements ClasificadorSupervisado {
         }
      }
       PatronBayes.promediar(Clases);
-      PatronBayes.sacarvarianza(Clases.get(0),instancias);
-      System.out.println(Clases.get(0).varianza[0]);
+      PatronBayes.sacarvarianza(Clases.get(1),aberraciones);
+      System.out.println(Clases.get(1).varianza[0]);
     }
     public void clasificar(ArrayList<Patron> instancias){
         

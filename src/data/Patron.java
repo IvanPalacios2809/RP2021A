@@ -32,6 +32,9 @@ public class Patron {
     public Patron(String clase){
         this.clase=clase;
     }
+    public Patron(double[] vectorC){
+        this.vectorC=vectorC;
+    }
     // distancia euclidiana
     public double calcularDistancia (Patron aux){
         double sumatoria = 0;
