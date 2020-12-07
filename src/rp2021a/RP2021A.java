@@ -6,6 +6,7 @@
 package rp2021a;
 
 import clasificadores.Bayes;
+import clasificadores.Cmeans;
 import clasificadores.MinimaDistancia;
 import data.LeerDatos;
 import data.Patron;
@@ -39,9 +40,11 @@ public class RP2021A {
         
         */
         ArrayList<Patron> instancias=LeerDatos.tokenizarDataSet();
-        Bayes b=new Bayes();
-        b.entrenar(instancias);
-        
+        //Bayes b=new Bayes();
+        //b.entrenar(instancias);
+        Cmeans CM=new Cmeans();
+        CM.entrenar(instancias);
+        CM.clasificar(instancias);        
 //        MinimaDistancia md=new MinimaDistancia();
 //        md.entrenar(instancias);
 //        md.clasificar(identificadas);
