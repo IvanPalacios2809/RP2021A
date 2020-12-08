@@ -40,8 +40,9 @@ public class RP2021A {
         
         */
         ArrayList<Patron> instancias=LeerDatos.tokenizarDataSet();
-        //Bayes b=new Bayes();
-        //b.entrenar(instancias);
+        Bayes b=new Bayes();
+        b.entrenar(instancias);
+        b.clasificar(instancias);
         Cmeans CM=new Cmeans();
         CM.entrenar(instancias);
         CM.clasificar(instancias);        

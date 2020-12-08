@@ -38,7 +38,6 @@ public class LeerDatos {
             file.showOpenDialog(file);
             //abrimos el archivo seleccionado
             File abre = file.getSelectedFile();
-
             //recorremos el archivo y lo leemos
             if (abre != null) {
                 FileReader archivos = new FileReader(abre);

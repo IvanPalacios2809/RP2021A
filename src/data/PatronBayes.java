@@ -15,12 +15,14 @@ public class PatronBayes extends Patron{
     public int contador;
     public double[] varianza;
     public double[] promedio;
+    public double[] desviacion;
     public ArrayList<Patron> Patrones;
     public PatronBayes( double[] vectorC, String clase) {
         super(vectorC, clase);
         promedio=new double[vectorC.length];
         varianza=new double[vectorC.length];
         Patrones=new ArrayList<>();
+        desviacion=new double[vectorC.length];
     }
 
     public PatronBayes(String clase) {
@@ -63,18 +65,27 @@ public class PatronBayes extends Patron{
             System.out.println(PB.contador);
             while(PB.getClase()!=instancias.get(punto_partida).getClase()){
                 punto_partida++;
-                System.out.println("entre");
+                
                 }
                
             int punto_final=PB.contador+punto_partida;
-                while(punto_partida<punto_final){
-                    for(int i=0;i<PB.varianza.length;i++){
-                        System.out.println(punto_partida);
-                    PB.varianza[i]=PB.varianza[i]+instancias.get(punto_partida).vectorC[i];
+                while(punto_partida<punto_final){//recorre el arraylist
+                   
+                    for(int i=0;i<PB.varianza.length;i++){//recorre el vector
+                      
+                    PB.varianza[i]+=Math.pow(instancias.get(punto_partida).vectorC[i]-PB.promedio[i],2);
                 }
             punto_partida++;     
             }
+            for(int i=0;i<PB.varianza.length;i++){
+                PB.varianza[i]/=(PB.contador-1);
+            }
                 }
+    public void Sacar_desviacion(){
+        for(int i=0;i<desviacion.length;i++){    
+        this.desviacion[i]=Math.sqrt(this.varianza[i]);
+        }
+    }                
             }
             
 
