@@ -15,10 +15,11 @@ import java.util.ArrayList;
  * @author LAST_
  */
 public class Bayes implements ClasificadorSupervisado {
-     
+    ArrayList<PatronBayes> Clases=new ArrayList<>();
+    double evidencia;
     public void entrenar(ArrayList<Patron> instancias){
      
-      ArrayList<PatronBayes> Clases=new ArrayList<>();   
+        
       //Saca los patrones representativos.
       int i=0;
      System.out.println(instancias.size());
@@ -55,7 +56,45 @@ public class Bayes implements ClasificadorSupervisado {
 }
 
     public void clasificar(ArrayList<Patron> instancias){
+    for(int j=0;j<instancias.size();j++){
+           
+        instancias.get(j).SacarDistribucionNormal(this.Clases, instancias);//Probabilidad dado x
+        System.out.println("j:"+j+""+instancias.get(j).distribucion_normal[0][0]);
         
     }
+    SacarEvidencia(instancias);
+    for(int j=0;j<instancias.size();j++){
+    instancias.get(j).CalcularProbabilidad(this.Clases);
+    }
+    Eficacia(instancias);
+}
+
+
+
     
+    public void SacarEvidencia(ArrayList<Patron> instancias){
+    double multiplicacion=1;
+        for(int j=0;j<this.Clases.size();j++){
+            multiplicacion=(double)this.Clases.get(j).contador/instancias.size();
+            System.out.println(multiplicacion);
+            for(int i=0;i<this.Clases.get(j).vectorC.length;i++){
+                multiplicacion*=Clases.get(j).desviacion[i];
+            }
+            System.out.println(multiplicacion);
+            this.evidencia+=multiplicacion;
+            multiplicacion=1;
+        }
+        System.out.println("Evidencia:"+evidencia);
+    }
+    public void Eficacia(ArrayList<Patron> instancias){
+        int contador=0;
+        double ef;
+        for(int i=0;i<instancias.size();i++){
+            if(instancias.get(i).getClase().equals(instancias.get(i).getClaseResultante())){
+                contador++;
+            }
+        }
+        ef=(double)contador/instancias.size()*100;
+        System.out.println("La eficacia de este algoritmo es de: "+ef+"%, Se obtuvo un resultado "+contador+" de "+);
+    }
 }

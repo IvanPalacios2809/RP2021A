@@ -5,6 +5,8 @@
  */
 package data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author working
@@ -14,16 +16,21 @@ public class Patron {
     private String clase;
     private String claseResultante;
     public double[] vectorC;
+    public double[][] distribucion_normal;
+    public double[] priori;
+    public double[] probabilidad;
     public Patron(int n) {
         this.clase = "";
         this.claseResultante = "";
         this.vectorC = new double[n];
+        
     }
 
     public Patron(String clase, String claseResultante, double[] vectorC) {
         this.clase = clase;
         this.claseResultante = claseResultante;
         this.vectorC = vectorC;
+       
     }
     public Patron(double[] vectorC, String clase){
         this.clase=clase;
@@ -89,7 +96,38 @@ public class Patron {
         this.vectorC = vectorC;
     }
     
-    
-    
+    public void SacarDistribucionNormal(ArrayList<PatronBayes> PB, ArrayList<Patron> instancias){
+     this.priori=new double[PB.size()];
+        this.distribucion_normal=new double[PB.get(0).vectorC.length][PB.size()];  
+        for(int j=0;j<PB.size();j++){
+        for (int i=0;i<distribucion_normal.length;i++){ 
+        this.distribucion_normal[i][j]=1/(Math.sqrt(2*Math.PI*Math.pow(PB.get(j).varianza[i],2)));
+        System.out.println("Primer paso:"+this.distribucion_normal[i][j]);
+        this.distribucion_normal[i][j]*=(double)Math.exp(-(Math.pow((this.vectorC[i]-PB.get(j).promedio[i]),2)/(2*Math.pow(PB.get(j).varianza[i],2))));
+        
+    }
+    System.out.println("Contador:"+PB.get(j).contador);
+    this.priori[j]=(double)PB.get(j).contador/instancias.size();
+    System.out.println("Priori:"+this.priori[j]);
+}
     
 }
+    
+    
+public void CalcularProbabilidad(ArrayList<PatronBayes> Clases){
+   this.probabilidad=new double[Clases.size()];
+    for(int j=0;j<Clases.size();j++){
+        this.probabilidad[j]=this.priori[j];
+        for(int i=0;i<Clases.get(j).vectorC.length;i++){
+            this.probabilidad[j]*=this.distribucion_normal[i][j];
+        }
+    }
+    for(int i=1;i<this.probabilidad.length;i++){
+        if(i==0){
+            this.claseResultante=Clases.get(i).getClase();
+        }
+        else if(this.probabilidad[i]>this.probabilidad[i-1]){
+            this.claseResultante=Clases.get(i).getClase();
+        }
+    }
+}}

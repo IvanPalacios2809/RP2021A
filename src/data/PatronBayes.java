@@ -16,6 +16,7 @@ public class PatronBayes extends Patron{
     public double[] varianza;
     public double[] promedio;
     public double[] desviacion;
+        
     public ArrayList<Patron> Patrones;
     public PatronBayes( double[] vectorC, String clase) {
         super(vectorC, clase);
