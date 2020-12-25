@@ -30,27 +30,27 @@ public class knn implements ClasificadorSupervisado{
     }
     public void clasificar(ArrayList<Patron> instancias){
         int[] votos=new int[NombreClases.size()];
-        ArrayList<Patron> Patrones=new ArrayList<>();
-        
-    for(int i=0;i<instancias.size()-1;i++){
-        PatronesClasificacion.add(new Patronknn(instancias.get(i).getClase(),instancias.get(i).getClaseResultante(), instancias.get(i).getVectorC(),PatronesEntrenamiento.size()));
-    }    
-    double[][] distancias=new double[PatronesClasificacion.size()][PatronesEntrenamiento.size()];
-    for(int j=0;j<PatronesClasificacion.size();j++){
-    for(int i=0;i<PatronesEntrenamiento.size();i++){//Calculamos las distancias entre los patrones de entrenamiento y patrones a clasificar
-           PatronesClasificacion.get(j).distancias[i]=PatronesClasificacion.get(j).calcularDistancia(PatronesEntrenamiento.get(i));
+        for(int i=0;i<instancias.size();i++){
+        PatronesClasificacion.add(new Patronknn("", instancias.get(i).getClase(), instancias.get(i).vectorC.clone()));
         }
-        
+        for(Patronknn p: PatronesClasificacion){
+        p.ordenarDatos(PatronesEntrenamiento);
+        p.clasificar(k,NombreClases);
+        }
+        efectividad(PatronesClasificacion);
     }
-    for(int i=0;i<PatronesClasificacion.size();i++){
-        PatronesClasificacion.get(i).indice_distancias=PatronesClasificacion.get(i).ordenarDatos(PatronesClasificacion.get(i).distancias);
+    public void efectividad(ArrayList<Patronknn> instancias){
+      int contador=0;  
+      double efec=0;
+        for(int i=0;i<instancias.size();i++){
+            System.out.println("Clase resultante: "+instancias.get(i).getClaseResultante());
+            if(instancias.get(i).getClase().equals(instancias.get(i).getClaseResultante())){
+               
+                contador++;
+            }
+
+        }
+        efec=(double)contador/instancias.size()*100;
+        System.out.println("La efectividad es de: "+efec+" Con una cantidad de: "+contador+" acertados");
     }
-    
-    for(int j=0;j<PatronesEntrenamiento.size();j++){
-    for(int i=0;i<k;i++){
-        //PatronesEntrenamiento.get(PatronesClasificacion.get(j).indice_distancias[i])
-    }
-    }
-    }
-    
 }

@@ -41,17 +41,17 @@ public class Cmeans implements ClasificadorSupervisado{
             //Sacamos las distancias y las alojamos en un vector de el patron cmeans en cuestion
            
             PC.get(i).media=0;
-            PC.get(i).sacarMedia(mitades);
+            PC.get(i).sacarMedia(mitades);//Saca la media entre los puntos actuales
             PC.get(i).ordenar(instancias);//Ordenamos las distancias
            
             PC.get(i).posicionar(mitades);//Posicionamos el nuevo punto del Patron Cmeans en cuestion
             for(int j=0;j<i;j++){
-            if(i>0 && PC.get(i).media==PC.get(j).media){
-               int valor_aleatorio=ran.nextInt(instancias.size());
+            if(i>0 && PC.get(i).media==PC.get(j).media){//Situacional cuando la media de otro punto se iguale a la actual
+               int valor_aleatorio=ran.nextInt(instancias.size());//Posiciona un nuevo punto en una posicion random
                 PC.get(i).media=0;
                 PC.get(i).media_parcial=1;
-                PC.get(i).vaciarvector();
-                PC.get(i).vectorC=instancias.get(valor_aleatorio).vectorC.clone();
+                PC.get(i).vaciarvector();//Vacia el vector con el cual se define la posicion del cmean
+                PC.get(i).vectorC=instancias.get(valor_aleatorio).vectorC.clone();//Pone un elemento random de nuevo en el vector
                 
             }}
         }

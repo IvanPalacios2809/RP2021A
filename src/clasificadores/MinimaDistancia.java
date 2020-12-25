@@ -32,10 +32,11 @@ public class MinimaDistancia implements ClasificadorSupervisado{
         if(representativos.isEmpty()){
             representativos.add(new PatronRepresentativo(instancias.get(i-1).vectorC,instancias.get(i-1).getClase()));
             System.out.println(instancias.get(i-1).getClase());
+            representativos.get(representativos.size()-1).AgregarUnoAlContador();
         } 
         if(PatronRepresentativo.comparar(instancias.get(i-1), instancias.get(i))){//Se compara la clase de las instancias para ver si son iguales
             representativos.add(new PatronRepresentativo(instancias.get(i).getVectorC(), instancias.get(i).getClase()));
-            System.out.println("Entre");
+            representativos.get(representativos.size()-1).AgregarUnoAlContador();
          }
 
          else{

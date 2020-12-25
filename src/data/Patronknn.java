@@ -5,6 +5,8 @@
  */
 package data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author LAST_
@@ -12,7 +14,7 @@ package data;
 public class Patronknn extends Patron{
     public double[] distancias;
     public int[] indice_distancias;
-    
+    public Patron[] patrones;
     public double[] getVectorC() {
         return vectorC;
     }
@@ -25,10 +27,8 @@ public class Patronknn extends Patron{
         super(n);
     }
 
-    public Patronknn(String clase, String claseResultante, double[] vectorC,int tamano) {
-        super(clase, claseResultante, vectorC);
-        distancias=new double[tamano];
-        indice_distancias=new int[tamano];
+    public Patronknn(String clase_resultante, String clase,double[] vectorC) {
+        super(clase,clase_resultante,vectorC);
     }
 
     public Patronknn(double[] vectorC, String clase) {
@@ -36,21 +36,47 @@ public class Patronknn extends Patron{
     }
      
     
-    public  int[] ordenarDatos(double[] datos) { // peor de los casos  3 + 3n + 16n2  notación "O" grande O(n2)  
+    public  void ordenarDatos(ArrayList<Patron> PatronesEntrenamiento) { // peor de los casos  3 + 3n + 16n2  notación "O" grande O(n2)  
       int i, j;
-      int aux;// 3
-      int[] posiciones=new int[datos.length-1];
-        for (i = 0; i < datos.length - 1; i++) { //  3(n)
+      patrones=new Patron[PatronesEntrenamiento.size()];
+      for(i=0;i<patrones.length;i++){
+          patrones[i]=PatronesEntrenamiento.get(i);
+      }
+      Patron aux;// 3
+      
+        for (i = 0; i < patrones.length - 1; i++) { //  3(n)
             // subir la burbuja o elemento a ordenar (ajustamos en la pos que le corresponde)
-            for (j = 0; j < datos.length - 1; j++) { // 16(n)(n) = 16n2
+            for (j = 0; j < patrones.length - 1; j++) { // 16(n)(n) = 16n2
                 // si entra al if se hace intercambio
-                if (datos[j + 1]< datos[j]) { // 4  13
-                    aux = j + 1; // 3
-                    posiciones[j + 1] = j; // 4
-                    posiciones[j] = aux; // 2
+                if (patrones[j + 1].calcularDistancia(this)< patrones[j].calcularDistancia(this)) { // 4  13
+                    aux = patrones[j + 1]; // 3
+                    patrones[j + 1] =patrones[j]; // 4
+                    patrones[j] = aux; // 2
                 }
             }
         }
-        return posiciones;
+        
+    }
+    public void clasificar(int k, ArrayList<String> NombreClases){
+        int[] contadores=new int[NombreClases.size()];
+        int indice=0;
+        for(int i=0;i<k;i++){
+            while(!this.patrones[i].getClase().equals(NombreClases.get(indice).toString())){
+                    indice++;
+            }
+            contadores[indice]+=1;
+            indice=0;
+        }
+        for(int i=0;i<contadores.length;i++){
+            if(i==0){
+                this.setClaseResultante(NombreClases.get(i));
+            }
+            else if(contadores[i]>contadores[i-1]){
+                this.setClaseResultante(NombreClases.get(i));
+                
+            }
+            System.out.println(this.getClaseResultante());
+        }
+        
     }
 }

@@ -101,14 +101,14 @@ public class Patron {
         this.distribucion_normal=new double[PB.get(0).vectorC.length][PB.size()];  
         for(int j=0;j<PB.size();j++){
         for (int i=0;i<distribucion_normal.length;i++){ 
-        this.distribucion_normal[i][j]=1/(Math.sqrt(2*Math.PI*Math.pow(PB.get(j).varianza[i],2)));
-        System.out.println("Primer paso:"+this.distribucion_normal[i][j]);
-        this.distribucion_normal[i][j]*=(double)Math.exp(-(Math.pow((this.vectorC[i]-PB.get(j).promedio[i]),2)/(2*Math.pow(PB.get(j).varianza[i],2))));
+        this.distribucion_normal[i][j]= (1 / Math.sqrt(2 * Math.PI * PB.get(j).varianza[i])) * Math.pow(Math.E, -((Math.pow(this.getVectorC()[i] - PB.get(j).promedio[i], 2)) / (2 * PB.get(j).varianza[i])));
+       
+        
         
     }
-    System.out.println("Contador:"+PB.get(j).contador);
+   
     this.priori[j]=(double)PB.get(j).contador/instancias.size();
-    System.out.println("Priori:"+this.priori[j]);
+    
 }
     
 }
@@ -121,6 +121,7 @@ public void CalcularProbabilidad(ArrayList<PatronBayes> Clases){
         for(int i=0;i<Clases.get(j).vectorC.length;i++){
             this.probabilidad[j]*=this.distribucion_normal[i][j];
         }
+    System.out.println("Clase"+j+"Probabilidad"+this.probabilidad[j]);
     }
     for(int i=1;i<this.probabilidad.length;i++){
         if(i==0){
